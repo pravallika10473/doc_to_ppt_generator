@@ -1,0 +1,155 @@
+**Neural Networks and Machine Learning Introduction**
+This paper illustrates how basic theories of linear algebra and calculus can be combined with computer programming methods to create neural networks.
+
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function** 
+In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution. There are many loss functions that can be used in neural networks; Mean Squared Error and Cross Entropy Loss are two of the most common.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Applications of Neural Networks trained with Backpropagation vary greatly. Such applications include sonar target recognition, text recognition, network controlled steering of cars, face recognition software, remote sensing, and robotics.
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function**
+A neural network may have thousands of parameters. Some combinations of weights and biases will produce better output for the model. In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Applications of Neural Networks trained with Backpropagation vary greatly. Such applications include sonar target recognition, text recognition, network controlled steering of cars, face recognition software, remote sensing, and robotics.
+**Introduction**
+As computers advanced in the 1950s, researchers attempted to simulate biologically inspired models that could recognize binary patterns. This led to the birth of machine learning, an application of computer science and mathematics in which systems have the ability to "learn" by improving their performance.
+
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function**
+In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution. There are many loss functions that can be used in neural networks; Mean Squared Error and Cross Entropy Loss are two of the most common.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Applications of Neural Networks trained with Backpropagation vary greatly. Such applications include sonar target recognition, text recognition, network controlled steering of cars, face recognition software, remote sensing, and robotics.
+**Neural Networks and Basic Concepts**
+As computers advanced in the 1950s, researchers attempted to simulate biologically inspired models that could recognize binary patterns. This led to the birth of machine learning, an application of computer science and mathematics in which systems have the ability to "learn" by improving their performance.
+
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function**
+In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution. There are many loss functions that can be used in neural networks; Mean Squared Error and Cross Entropy Loss are two of the most common.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Automatic differentiation has many applications other than in machine learning such as in Data Assimilation, Design Optimization, Numerical Methods, and Sensitivity Analysis. It is efficient, stable, precise, and known to be a better choice than other types of computer-based differentiation. Backpropagation has been called into question recently, as it does not learn continuously.
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function**
+A neural network may have thousands of parameters. Some combinations of weights and biases will produce better output for the model. In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Automatic differentiation has many applications other than in machine learning such as in Data Assimilation, Design Optimization, Numerical Methods, and Sensitivity Analysis. Applications of Neural Networks trained with Backpropagation vary greatly. Such applications include sonar target recognition, text recognition, network controlled steering of cars, face recognition software, remote sensing, and robotics.
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function**
+A neural network may have thousands of parameters. Some combinations of weights and biases will produce better output for the model. In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Applications of Neural Networks trained with Backpropagation vary greatly. Such applications include sonar target recognition, text recognition, network controlled steering of cars, face recognition software, remote sensing, and robotics.
+**Neural Networks and Machine Learning Introduction**
+This paper illustrates how basic theories of linear algebra and calculus can be combined with computer programming methods to create neural networks.
+
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function**
+In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution. There are many loss functions that can be used in neural networks; Mean Squared Error and Cross Entropy Loss are two of the most common.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Applications of Neural Networks trained with Backpropagation vary greatly. Such applications include sonar target recognition, text recognition, network controlled steering of cars, face recognition software, remote sensing, and robotics.
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function**
+A neural network may have thousands of parameters. Some combinations of weights and biases will produce better output for the model. In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Applications of Neural Networks trained with Backpropagation vary greatly. Such applications include sonar target recognition, text recognition, network controlled steering of cars, face recognition software, remote sensing, and robotics.
+**Introduction to Neural Networks**
+As computers advanced in the 1950s, researchers attempted to simulate biologically inspired models that could recognize binary patterns. This led to the birth of machine learning, an application of computer science and mathematics in which systems have the ability to "learn" by improving their performance.
+
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function**
+In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution. There are many loss functions that can be used in neural networks; Mean Squared Error and Cross Entropy Loss are two of the most common.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Applications of Neural Networks trained with Backpropagation vary greatly. Such applications include sonar target recognition, text recognition, network controlled steering of cars, face recognition software, remote sensing, and robotics.
+**Neural Network Architecture**
+In order to understand Neural Networks, we must first examine the smallest unit in a system: the neuron. A neuron is a unit which holds a number; it is a mathematical function that collects information.
+
+**The Activation Function**
+The function 𝑧𝑖 is linear in nature; thus, a nonlinear activation function is applied for more complex performance. Activation functions commonly used include sigmoid functions, piecewise functions, gaussian functions, tangent functions, threshold functions, or ReLu functions.
+
+**The Cost/Loss Function**
+In order to measure error, a loss function is necessary. The loss function tells the machine how far away the combination of weights and biases is from the optimal solution. There are many loss functions that can be used in neural networks; Mean Squared Error and Cross Entropy Loss are two of the most common.
+
+**The Backpropagation Algorithm**
+The objective of machine learning involves the optimization of the chosen loss function. With every epoch, the machine "learns" by adapting the weights and biases to minimize the loss. Optimization theory centers itself on calculus. For neural networks in particular, reverse-mode automatic differentiation serves a core role.
+
+**Applications and Further Research**
+Applications of Neural Networks trained with Backpropagation vary greatly. Such applications include sonar target recognition, text recognition, network controlled steering of cars, face recognition software, remote sensing, and robotics.
