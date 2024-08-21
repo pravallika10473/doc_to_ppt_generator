@@ -1,3 +1,6 @@
 .env
 test.pptx
 doc.txt
+__pycache__
+prompt1Output.txt
+powerPointStructure.txt

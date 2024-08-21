@@ -7,7 +7,7 @@ import re
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from dotenv import load_dotenv
-from messages.py import prompt1, prompt2
+from messages import prompt_prefix1, prompt_prefix2
 
 load_dotenv()
 
@@ -42,10 +42,6 @@ def makeApiCall(apiKey, content):
         print(f"General error: {e}")
     return None
 
-def prompt1(promptTemplate, text):
-    prompt = promptTemplate.replace("<paste document content here>", text)
-    return prompt
-
 def extractTopicLines(output):
     extracted_dict = []
     lines = output.split("\n")
@@ -57,7 +53,7 @@ def extractTopicLines(output):
     return extracted_dict
 
 def saveContentToFile(filePath, content):
-    with open(filePath, 'a', encoding='utf-8') as file:
+    with open(filePath, 'w', encoding='utf-8') as file:
         file.write(content + "\n")
 
 def appendContentToFile(filePath, keyTopic, content):
@@ -76,7 +72,7 @@ def read_word_document(file_path):
     full_text = []
     for para in doc.paragraphs:
         full_text.append(para.text)
-    saveContentToFile(wordFilePath, full_text)
+    saveContentToFile(wordFilePath, '\n'.join(full_text))
     return '\n'.join(full_text)
 
 def read_text_document(file_path):
@@ -92,7 +88,7 @@ def parse_input(filename):
     i = 0
     while i < len(sections):
         topic = sections[i].strip()
-        points = [p.strip() for p in sections[i+1].split('-') if p.strip()]
+        points = [p.strip() for p in sections[i+1].split('*') if p.strip()]
         parsed_data.append((topic, points))
         i += 2
     return parsed_data
@@ -109,6 +105,8 @@ def add_slide(prs, layout, title, points):
         tf.text = ""
         
         for point in points:
+            # print("POINT HERE")
+            # print(point)
             p = tf.add_paragraph()
             p.text = point
             p.level = 0
@@ -116,7 +114,7 @@ def add_slide(prs, layout, title, points):
     return slide
 
 def update_presentation(parsed_data, pptx_path):
-    prs = Presentation(pptx_path)
+    prs = Presentation()  # Start a new presentation instead of loading an existing one
     
     title_layout = None
     title_content_layout = None
@@ -130,31 +128,29 @@ def update_presentation(parsed_data, pptx_path):
         title_layout = prs.slide_layouts[0]
     if not title_content_layout:
         title_content_layout = prs.slide_layouts[1]
-    
+    # print("#######################")
+    # print(parsed_data)
     for topic, points in parsed_data:
         if not points:
             add_slide(prs, title_layout, topic, [])
         else:
-            while points:
-                add_slide(prs, title_content_layout, topic, points[:7])
-                points = points[7:]
+            # for point in points:
+            #     print(point)
+            add_slide(prs, title_content_layout, topic, points)
+                # points = points[7:]
     
-    prs.save(pptx_path)
+    prs.save(pptx_path)  # Save the new presentation
 
-def main(apiKey, articlePath, prompt1TemplatePath, prompt2TemplatePath, prompt1OutputPath, powerPointStructurePath, pptxPath):
+def main(apiKey, articlePath, prompt1OutputPath, powerPointStructurePath, pptxPath):
+    # Create empty files at the start of the session
+    open(prompt1OutputPath, 'w').close()
+    open(powerPointStructurePath, 'w').close()
+    
+    # read the original doc
     document = read_document(articlePath)
-    
-    # with open(prompt1TemplatePath, 'r', encoding='utf-8') as file:
-    #     promptTemplate1 = file.read()
-    
-    # with open(prompt2TemplatePath, 'r', encoding='utf-8') as file:
-    #     promptTemplate2 = file.read()
-        
-    promptTemplate1=prompt1
-    promptTemplate2=prompt2
-
-    prompt1_content = prompt1(promptTemplate1, document)
+    prompt1_content = prompt_prefix1 + document
     output1 = makeApiCall(apiKey, prompt1_content)
+    promptTemplate2 = prompt_prefix2
 
     if output1:
         saveContentToFile(prompt1OutputPath, output1)
@@ -173,7 +169,7 @@ def main(apiKey, articlePath, prompt1TemplatePath, prompt2TemplatePath, prompt1O
 
     try:
         parsed_data = parse_input(powerPointStructurePath)
-        print(parsed_data)
+        # print(parsed_data)
         if not parsed_data:
             print("Error: No topics found in the input file.")
             return
@@ -188,11 +184,9 @@ def main(apiKey, articlePath, prompt1TemplatePath, prompt2TemplatePath, prompt1O
 if __name__ == "__main__":
     apiKey = os.getenv('ANTHROPIC_API_KEY') 
     articlePath = "doc.txt"
-    prompt1TemplatePath =  "prompt1Template.txt"
-    prompt2TemplatePath = "prompt2Template.txt"
     prompt1OutputPath = "prompt1Output.txt"
-    powerPointStructurePath =  "powerPointStructure.txt"
-    wordFilePath =  "wordFile.txt"
+    powerPointStructurePath = "powerPointStructure.txt"
+    wordFilePath = "wordFile.txt"
     pptxPath = "test.pptx"
 
-    main(apiKey, articlePath, prompt1TemplatePath, prompt2TemplatePath, prompt1OutputPath, powerPointStructurePath, pptxPath)
+    main(apiKey, articlePath, prompt1OutputPath, powerPointStructurePath, pptxPath)
