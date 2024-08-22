@@ -7,7 +7,8 @@ import re
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from dotenv import load_dotenv
-from messages import prompt_prefix1, prompt_prefix2
+from messages import prompt_prefix0, prompt_prefix1, prompt_prefix2
+import time
 
 load_dotenv()
 
@@ -42,6 +43,15 @@ def makeApiCall(apiKey, content):
         print(f"General error: {e}")
     return None
 
+def extractKeyTopics(output):
+    extracted_topics = []
+    lines = output.split("\n")
+    for i, line in enumerate(lines):
+        if line.startswith("**") and line.endswith("**"):
+            key_topic = line.strip("**")
+            extracted_topics.append(key_topic)
+    return extracted_topics
+
 def extractTopicLines(output):
     extracted_dict = []
     lines = output.split("\n")
@@ -51,6 +61,22 @@ def extractTopicLines(output):
             starting_lines = "\n".join(lines[i+1:i+3])
             extracted_dict.append({"key_topic": key_topic, "starting_lines": starting_lines})
     return extracted_dict
+
+def extract_sections(text,section_titles):
+    
+    # Initialize the dictionary to hold the extracted content
+    document_dict = {}
+
+    # regex pattern to match section titles and their content
+    pattern = re.compile(r'(?P<title>' + '|'.join(re.escape(title) for title in section_titles) + r')(?:\s*[\r\n]+(?P<content>.*?))?(?=(?:' + '|'.join(re.escape(title) for title in section_titles[1:]) + r')|$)', re.DOTALL)
+
+    # Extract sections and their content
+    for match in pattern.finditer(text):
+        title = match.group('title').strip()
+        content = match.group('content').strip()
+        document_dict[title] = content
+
+    return document_dict
 
 def saveContentToFile(filePath, content):
     with open(filePath, 'w', encoding='utf-8') as file:
@@ -92,6 +118,9 @@ def parse_input(filename):
         parsed_data.append((topic, points))
         i += 2
     return parsed_data
+
+
+
 
 def add_slide(prs, layout, title, points):
     slide = prs.slides.add_slide(layout)
@@ -141,52 +170,65 @@ def update_presentation(parsed_data, pptx_path):
     
     prs.save(pptx_path)  # Save the new presentation
 
-def main(apiKey, articlePath, prompt1OutputPath, powerPointStructurePath, pptxPath):
+def main(apiKey, articlePath, prompt0OutputPath,prompt1OutputPath, powerPointStructurePath, pptxPath):
     # Create empty files at the start of the session
+    open(prompt0OutputPath, 'w').close()
     open(prompt1OutputPath, 'w').close()
     open(powerPointStructurePath, 'w').close()
     
     # read the original doc
     document = read_document(articlePath)
-    prompt1_content = prompt_prefix1 + document
-    output1 = makeApiCall(apiKey, prompt1_content)
-    promptTemplate2 = prompt_prefix2
+    prompt0_content= prompt_prefix0 + document
+    output0 = makeApiCall(apiKey, prompt0_content)
+    if output0:
+        saveContentToFile(prompt0OutputPath, output0)
+        keyTopics = extractKeyTopics(output0)
+        print(keyTopics)
+    sectioned_doc= extract_sections(document,keyTopics)
+    for key, value in sectioned_doc.items():
+        if value:
+            
+            prompt1_content = prompt_prefix1 + value
+            output1 = makeApiCall(apiKey, prompt1_content)
+            promptTemplate2 = prompt_prefix2
 
-    if output1:
-        saveContentToFile(prompt1OutputPath, output1)
-        extracted_dict = extractTopicLines(output1)
-    
-        for i, entry in enumerate(extracted_dict):
-            keyTopic = entry["key_topic"]
-            startingLines = entry["starting_lines"]
-            nextTopicStartingLines = extracted_dict[i + 1]["starting_lines"] if i + 1 < len(extracted_dict) else ""
+            if output1:
+                saveContentToFile(prompt1OutputPath, output1)
+                extracted_dict = extractTopicLines(output1)
+            
+                for i, entry in enumerate(extracted_dict):
+                    keyTopic = entry["key_topic"]
+                    startingLines = entry["starting_lines"]
+                    nextTopicStartingLines = extracted_dict[i + 1]["starting_lines"] if i + 1 < len(extracted_dict) else ""
 
-            prompt2_content = promptTemplate2.replace("{{keytopic}}", keyTopic).replace("{{startingLines}}", startingLines).replace("{{nextTopicStartingLines}}", nextTopicStartingLines).replace("<paste full document here>", document)
-            output2 = makeApiCall(apiKey, prompt2_content)
+                    prompt2_content = promptTemplate2.replace("{{keytopic}}", keyTopic).replace("{{startingLines}}", startingLines).replace("{{nextTopicStartingLines}}", nextTopicStartingLines).replace("<paste full document here>", document)
+                    output2 = makeApiCall(apiKey, prompt2_content)
+                    time.sleep(2)
 
-            if output2:
-                appendContentToFile(powerPointStructurePath, keyTopic, output2)
+                    if output2:
+                        appendContentToFile(powerPointStructurePath, keyTopic, output2)
 
-    try:
-        parsed_data = parse_input(powerPointStructurePath)
-        # print(parsed_data)
-        if not parsed_data:
-            print("Error: No topics found in the input file.")
-            return
-        
-        update_presentation(parsed_data, pptxPath)
-        print(f"Slides added to the PowerPoint presentation successfully: {pptxPath}")
-    except FileNotFoundError:
-        print("Error: input.txt file or specified PowerPoint file not found.")
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
+            try:
+                parsed_data = parse_input(powerPointStructurePath)
+                # print(parsed_data)
+                if not parsed_data:
+                    print("Error: No topics found in the input file.")
+                    return
+                
+                update_presentation(parsed_data, pptxPath)
+                print(f"Slides added to the PowerPoint presentation successfully: {pptxPath}")
+            except FileNotFoundError:
+                print("Error: input.txt file or specified PowerPoint file not found.")
+            except Exception as e:
+                print(f"An error occurred: {str(e)}")
 
 if __name__ == "__main__":
     apiKey = os.getenv('ANTHROPIC_API_KEY') 
     articlePath = "doc.txt"
     prompt1OutputPath = "prompt1Output.txt"
+    prompt0OutputPath = "prompt0Output.txt"
     powerPointStructurePath = "powerPointStructure.txt"
     wordFilePath = "wordFile.txt"
     pptxPath = "test.pptx"
 
-    main(apiKey, articlePath, prompt1OutputPath, powerPointStructurePath, pptxPath)
+    main(apiKey, articlePath, prompt0OutputPath,prompt1OutputPath, powerPointStructurePath, pptxPath)
